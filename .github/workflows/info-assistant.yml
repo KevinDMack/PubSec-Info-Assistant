@@ -53,6 +53,10 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Set up Azure CLI
+        shell: bash
+        run: az --version
+
       - name: "Validate CLI"
         shell: bash 
         run: az account show
