@@ -127,5 +127,8 @@ jobs:
       - name: Write Local.env
         shell: bash
         run: |
-          echo "${{ secrets.LOCAL_ENV }}" > ./scripts/environment/local.env
+          echo "Local Director:"  
+          ls -la
+          echo ""
+          echo "${{ secrets.LOCAL_ENV }}" > ./scripts/environments/local.env
           
