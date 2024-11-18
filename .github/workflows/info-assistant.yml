@@ -52,6 +52,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          environment: 'AzureUSGovernment'
 
       - name: Set up Azure CLI
         shell: bash
