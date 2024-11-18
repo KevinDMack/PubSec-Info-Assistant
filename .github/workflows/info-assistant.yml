@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
     push:
         branches:
-         - main
+         - km/workflow
 
 jobs:
   deploy-info-assistant:
@@ -52,3 +52,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: "Validate CLI"
+        shell: bash 
+        run: az account show
