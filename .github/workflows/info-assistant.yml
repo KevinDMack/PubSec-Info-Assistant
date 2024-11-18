@@ -127,7 +127,7 @@ jobs:
       - name: Write Local.env
         shell: bash
         run: |
-          # echo "${{ secrets.TEST_ENV }}" > ./scripts/environments/local.env
+          echo "${{ secrets.LOCAL_ENV }}" > ./scripts/environments/local.env
           echo "${{ secrets.TEST_ENV }}" > ./test.env
           echo ""
           echo "Env Contents:"
