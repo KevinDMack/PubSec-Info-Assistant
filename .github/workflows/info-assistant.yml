@@ -139,7 +139,7 @@ jobs:
           echo ""
           echo "Writing inf-output.json file..."
           if [ ! -f ./inf-output.json ]; then
-            printf "%s" "${{ secrets.INF_OUTPUT_JSON }}" > ./inf-output.json
+            printf "%s" "${{ secrets.INF_OUTPUT_JSON }}" > ./inf_output.json
           fi
           echo ""
           echo "Finished creating env files."
