@@ -405,3 +405,4 @@ azcopy_dir
 #Openvpn setting
 openvpn/*
 !openvpn/info.txt
+scripts/environments/tf-backend.env
