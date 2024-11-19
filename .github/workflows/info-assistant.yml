@@ -128,71 +128,71 @@ jobs:
         shell: bash
         run: |
           echo "Writing local env file..."
-          if [ -n "${{ secrets.LOCAL_ENV }}" ]; then
+          if [ ! -f ./scripts/environments/local.env ]; then
             echo "${{ secrets.LOCAL_ENV }}" > ./scripts/environments/local.env
           fi
           echo ""
           echo "Writing tf-backend env file..."
-          if [ -n "${{ secrets.TF_BACKEND }}" ]; then
+          if [ ! -f ./scripts/environments/tf-backend.env ]; then
             echo "${{ secrets.TF_BACKEND }}" > ./scripts/environments/tf-backend.env
           fi
           echo ""
           echo "Writing inf-output.json file..."
-          if [ -n "${{ secrets.INF_OUTPUT_JSON }}" ]; then
+          if [ ! -f ./inf-output.json ]; then
             echo "${{ secrets.INF_OUTPUT_JSON }}" > ./inf-output.json
           fi
           echo ""
           echo "Finished creating env files."
 
-      - name: Standup Devcontainer
-        shell: bash
-        run: |
-          devcontainer up --workspace-folder .
-
-      - name: Login inside devcontainer
-        shell: bash
-        run: |
-          devcontainer exec --workspace-folder . az cloud set --name AzureUSGovernment 
-          devcontainer exec --workspace-folder . az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_CLIENT_TENANT_ID }}
-          
-      - name: Make-Run Take Ownership
-        shell: bash
-        run: |
-          devcontainer exec --workspace-folder . make take-dir-ownership
-
-      - name: Make-Build
-        shell: bash
-        run: |
-          devcontainer exec --workspace-folder . make build
-
-      # This is for the deployment of the infrastructure, should be used with caution given that changes for domain names and urls to the App Service that are not in the terraform.  
-      # - name: Make-infra
+      # - name: Standup Devcontainer
       #   shell: bash
       #   run: |
-      #     devcontainer exec --workspace-folder . source ./scripts/environments/tf-backend.env
-      #     devcontainer exec --workspace-folder . make infrastructure-remote-backend
+      #     devcontainer up --workspace-folder .
 
-      - name: Make-Extract environment
-        shell: bash
-        run: |
-          devcontainer exec --workspace-folder . make extract-env
+      # - name: Login inside devcontainer
+      #   shell: bash
+      #   run: |
+      #     devcontainer exec --workspace-folder . az cloud set --name AzureUSGovernment 
+      #     devcontainer exec --workspace-folder . az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_CLIENT_TENANT_ID }}
+          
+      # - name: Make-Run Take Ownership
+      #   shell: bash
+      #   run: |
+      #     devcontainer exec --workspace-folder . make take-dir-ownership
 
-      - name: Make-Deploy Search indexes
-        shell: bash
-        run: |
-          devcontainer exec --workspace-folder . make deploy-search-indexes
+      # - name: Make-Build
+      #   shell: bash
+      #   run: |
+      #     devcontainer exec --workspace-folder . make build
 
-      - name: Make-Deploy Azure Functions
-        shell: bash
-        run: |
-          devcontainer exec --workspace-folder . make deploy-functions
+      # # This is for the deployment of the infrastructure, should be used with caution given that changes for domain names and urls to the App Service that are not in the terraform.  
+      # # - name: Make-infra
+      # #   shell: bash
+      # #   run: |
+      # #     devcontainer exec --workspace-folder . source ./scripts/environments/tf-backend.env
+      # #     devcontainer exec --workspace-folder . make infrastructure-remote-backend
 
-      - name: Make-Deploy Web App'
-        shell: bash
-        run: |
-          devcontainer exec --workspace-folder . make deploy-web-app
+      # - name: Make-Extract environment
+      #   shell: bash
+      #   run: |
+      #     devcontainer exec --workspace-folder . make extract-env
 
-      - name: Make-Deploy Enrichments
-        shell: bash
-        run: |
-          devcontainer exec --workspace-folder . make deploy-enrichments
+      # - name: Make-Deploy Search indexes
+      #   shell: bash
+      #   run: |
+      #     devcontainer exec --workspace-folder . make deploy-search-indexes
+
+      # - name: Make-Deploy Azure Functions
+      #   shell: bash
+      #   run: |
+      #     devcontainer exec --workspace-folder . make deploy-functions
+
+      # - name: Make-Deploy Web App'
+      #   shell: bash
+      #   run: |
+      #     devcontainer exec --workspace-folder . make deploy-web-app
+
+      # - name: Make-Deploy Enrichments
+      #   shell: bash
+      #   run: |
+      #     devcontainer exec --workspace-folder . make deploy-enrichments
