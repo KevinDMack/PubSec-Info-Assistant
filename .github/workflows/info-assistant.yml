@@ -144,7 +144,17 @@ jobs:
           devcontainer exec --workspace-folder . az cloud set --name AzureUSGovernment 
           devcontainer exec --workspace-folder . az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_CLIENT_TENANT_ID }}
           
-      - name: Deploy from DevContainer
+      - name: Deploy webapp from DevContainer
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . make deploy
+          devcontainer exec --workspace-folder . make build-deploy-webapp
+
+      - name: Deploy enrichments from DevContainer
+        shell: bash
+        run: |
+          devcontainer exec --workspace-folder . make build-deploy-enrichments
+
+      - name: Deploy functions from DevContainer
+        shell: bash
+        run: |
+          devcontainer exec --workspace-folder . make build-deploy-functions
