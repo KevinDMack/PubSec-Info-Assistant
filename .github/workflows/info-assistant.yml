@@ -138,7 +138,7 @@ jobs:
           fi
           echo ""
           echo "Writing inf-output.json file..."
-          if [ -n "${{ secrets.INF_OUTPUT_JSON }}"]; then
+          if [ -n "${{ secrets.INF_OUTPUT_JSON }}" ]; then
             echo "${{ secrets.INF_OUTPUT_JSON }}" > ./inf-output.json
           fi
           echo ""
