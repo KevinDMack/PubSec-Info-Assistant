@@ -175,6 +175,10 @@ jobs:
       - name: Make-Extract environment
         shell: bash
         run: |
+          echo "Getting directory contents..."
+          devcontainer exec --workspace-folder . ls
+          echo "" 
+          echo "Running make extract-env..."
           devcontainer exec --workspace-folder . make extract-env
 
       - name: Make-Deploy Search indexes
