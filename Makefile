@@ -21,7 +21,7 @@ build: ## Build application code
 infrastructure: check-subscription ## Deploy infrastructure
 	@./scripts/inf-create.sh
 
-extract-env: check-secure-mode-connectivity extract-env-debug-webapp extract-env-debug-functions ## Extract infrastructure.env file from Terraform output
+extract-env: extract-env-debug-webapp extract-env-debug-functions ## Extract infrastructure.env file from Terraform output
 	 @./scripts/json-to-env.sh < inf_output.json > ./scripts/environments/infrastructure.env
 
 check-secure-mode-connectivity: ## Check secure mode connectivity
