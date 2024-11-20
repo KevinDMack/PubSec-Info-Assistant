@@ -162,7 +162,16 @@ jobs:
         run: |
           devcontainer exec --workspace-folder . az cloud set --name AzureUSGovernment 
           devcontainer exec --workspace-folder . az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_CLIENT_TENANT_ID }}
-          
+
+      - name: Replace Tokens
+        shell: bash
+        run: |
+          sed -i "s|__SUFFIX__/${{ secrets.SUFFIX }}|g" ./inf_output.json
+          sed -i "s|__AOAI_SERVICE_NAME__|${{ secrets.AOAI_SERVICE_NAME }}|g" ./inf_output.json
+          sed -i "s|__AOAI_RESOURCE_GROUP__|${{ secrets.AOAI_RESOURCE_GROUP }}|g" ./inf_output.json
+          sed -i "s|__CONTAINER_REGISTRY_PASSWORD__|${{ secrets.CONTAINER_REGISTRY_PASSWORD }}|g" ./inf_output.json
+          sed -i "s|__INFO_ASSIST_RESOURCE_GROUP__|${{ secrets.INFO_ASSIST_RESOURCE_GROUP }}|g" ./inf_output.json
+
       - name: Make-Run Take Ownership
         shell: bash
         run: |
