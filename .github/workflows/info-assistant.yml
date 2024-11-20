@@ -1,10 +1,12 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
 name: info-assistant-deploy
 
 on: 
     workflow_dispatch:
     push:
         branches:
-         - km/workflow
+         - main # Change to match your branch
 
 jobs:
   deploy-info-assistant:
