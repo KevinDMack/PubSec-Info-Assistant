@@ -141,14 +141,6 @@ jobs:
             echo "${{ secrets.TF_BACKEND }}" > ./scripts/environments/tf-backend.env
           fi
           echo ""
-          echo "Writing inf-output.json file..."
-          if [ ! -f ./inf-output.json ]; then
-            echo "${{ secrets.INF_OUTPUT_JSON }}" > ./raw_inf_output.json
-            cat ./raw_inf_output.json
-            cat ./raw_inf_output.json | jq '.' > ./inf_output.json
-            rm ./raw_inf_output.json
-          fi
-          echo ""
           echo "Finished creating env files."
           cat ./inf_output.json
 
