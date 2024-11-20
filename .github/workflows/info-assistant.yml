@@ -203,7 +203,7 @@ jobs:
       - name: Make-Deploy Web App'
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . make deploy-web-app
+          devcontainer exec --workspace-folder . make deploy-webapp
 
       - name: Make-Deploy Enrichments
         shell: bash
