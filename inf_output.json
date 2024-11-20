@@ -1,0 +1,282 @@
+{
+  "AZURE_AI_CREDENTIAL_DOMAIN": {
+    "sensitive": false,
+    "type": "string",
+    "value": "cognitiveservices.azure.us"
+  },
+  "AZURE_AI_ENDPOINT": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasst-aisvc-__SUFFIX__.cognitiveservices.azure.us/"
+  },
+  "AZURE_AI_LOCATION": {
+    "sensitive": false,
+    "type": "string",
+    "value": "usgovarizona"
+  },
+  "AZURE_ARM_MANAGEMENT_API": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://management.usgovcloudapi.net"
+  },
+  "AZURE_BLOB_DROP_STORAGE_CONTAINER": {
+    "sensitive": false,
+    "type": "string",
+    "value": "upload"
+  },
+  "AZURE_BLOB_LOG_STORAGE_CONTAINER": {
+    "sensitive": false,
+    "type": "string",
+    "value": "logs"
+  },
+  "AZURE_COSMOSDB_LOG_CONTAINER_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "statuscontainer"
+  },
+  "AZURE_COSMOSDB_LOG_DATABASE_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "statusdb"
+  },
+  "AZURE_COSMOSDB_URL": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasst-cosmos-__SUFFIX__.documents.azure.us:443/"
+  },
+  "AZURE_ENVIRONMENT": {
+    "sensitive": false,
+    "type": "string",
+    "value": "AzureUSGovernment"
+  },
+  "AZURE_FORM_RECOGNIZER_ENDPOINT": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasst-docint-__SUFFIX__.cognitiveservices.azure.us/"
+  },
+  "AZURE_FUNCTION_APP_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "infoasst-func-__SUFFIX__"
+  },
+  "AZURE_KEYVAULT_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "infoasst-kv-__SUFFIX__"
+  },
+  "AZURE_LOCATION": {
+    "sensitive": false,
+    "type": "string",
+    "value": "usgovarizona"
+  },
+  "AZURE_OPENAI_AUTHORITY_HOST": {
+    "sensitive": false,
+    "type": "string",
+    "value": "AzureUSGovernment"
+  },
+  "AZURE_OPENAI_CHAT_GPT_DEPLOYMENT": {
+    "sensitive": false,
+    "type": "string",
+    "value": "info-assist"
+  },
+  "AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "text-embedding-ada-002"
+  },
+  "AZURE_OPENAI_ENDPOINT": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://__AOAI_SERVICE_NAME__.openai.azure.us/"
+  },
+  "AZURE_OPENAI_RESOURCE_GROUP": {
+    "sensitive": false,
+    "type": "string",
+    "value": "__"
+  },
+  "AZURE_OPENAI_SERVICE": {
+    "sensitive": false,
+    "type": "string",
+    "value": "__AOAI_SERVICE_NAME__"
+  },
+  "AZURE_QUEUE_STORAGE_ENDPOINT": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasststore__SUFFIX__.queue.core.usgovcloudapi.net/"
+  },
+  "AZURE_SEARCH_AUDIENCE": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://search.azure.us"
+  },
+  "AZURE_SEARCH_INDEX": {
+    "sensitive": false,
+    "type": "string",
+    "value": "vector-index"
+  },
+  "AZURE_SEARCH_SERVICE": {
+    "sensitive": false,
+    "type": "string",
+    "value": "infoasst-search-__SUFFIX__"
+  },
+  "AZURE_SEARCH_SERVICE_ENDPOINT": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasst-search-__SUFFIX__.search.azure.us/"
+  },
+  "AZURE_STORAGE_ACCOUNT": {
+    "sensitive": false,
+    "type": "string",
+    "value": "infoasststore__SUFFIX__"
+  },
+  "AZURE_STORAGE_CONTAINER": {
+    "sensitive": false,
+    "type": "string",
+    "value": "content"
+  },
+  "AZURE_STORAGE_UPLOAD_CONTAINER": {
+    "sensitive": false,
+    "type": "string",
+    "value": "upload"
+  },
+  "AZURE_SUBSCRIPTION_ID": {
+    "sensitive": false,
+    "type": "string",
+    "value": "1fde3f57-ac3a-4089-bb2b-61bba6db0f70"
+  },
+  "BACKEND_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "infoasst-web-__SUFFIX__"
+  },
+  "BACKEND_URI": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasst-web-__SUFFIX__.azurewebsites.us"
+  },
+  "BING_SEARCH_ENDPOINT": {
+    "sensitive": false,
+    "type": "string",
+    "value": ""
+  },
+  "BING_SEARCH_KEY": {
+    "sensitive": false,
+    "type": "string",
+    "value": ""
+  },
+  "BLOB_STORAGE_ACCOUNT_ENDPOINT": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasststore__SUFFIX__.blob.core.usgovcloudapi.net/"
+  },
+  "CHAT_WARNING_BANNER_TEXT": {
+    "sensitive": false,
+    "type": "string",
+    "value": ""
+  },
+  "CHUNK_TARGET_SIZE": {
+    "sensitive": false,
+    "type": "string",
+    "value": "750"
+  },
+  "CONTAINER_REGISTRY": {
+    "sensitive": false,
+    "type": "string",
+    "value": "infoasstacr__SUFFIX__.azurecr.us"
+  },
+  "CONTAINER_REGISTRY_PASSWORD": {
+    "sensitive": true,
+    "type": "string",
+    "value": "__CONTAINER_REGISTRY_PASSWORD__"
+  },
+  "CONTAINER_REGISTRY_USERNAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "infoasstacr__SUFFIX__"
+  },
+  "DNS_PRIVATE_RESOLVER_IP": {
+    "sensitive": false,
+    "type": "string",
+    "value": ""
+  },
+  "EMBEDDING_DEPLOYMENT_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "text-embedding-ada-002"
+  },
+  "EMBEDDING_VECTOR_SIZE": {
+    "sensitive": false,
+    "type": "string",
+    "value": "1536"
+  },
+  "ENABLE_BING_SAFE_SEARCH": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  },
+  "ENABLE_DEV_CODE": {
+    "sensitive": false,
+    "type": "bool",
+    "value": false
+  },
+  "ENRICHMENT_APPSERVICE_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "infoasst-enrichmentweb-__SUFFIX__"
+  },
+  "ENRICHMENT_APPSERVICE_URL": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasst-enrichmentweb-__SUFFIX__.azurewebsites.us"
+  },
+  "ENRICHMENT_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "infoasst-aisvc-__SUFFIX__"
+  },
+  "FR_API_VERSION": {
+    "sensitive": false,
+    "type": "string",
+    "value": "2023-07-31"
+  },
+  "FUNC_STORAGE_CONNECTION_STRING__blobServiceUri": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasststore__SUFFIX__.blob.core.usgovcloudapi.net"
+  },
+  "FUNC_STORAGE_CONNECTION_STRING__queueServiceUri": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://infoasststore__SUFFIX__.queue.core.usgovcloudapi.net"
+  },
+  "MAX_CSV_FILE_SIZE": {
+    "sensitive": false,
+    "type": "string",
+    "value": "20"
+  },
+  "RESOURCE_GROUP_NAME": {
+    "sensitive": false,
+    "type": "string",
+    "value": "__INFO_ASSIST_RESOURCE_GROUP__"
+  },
+  "TARGET_EMBEDDINGS_MODEL": {
+    "sensitive": false,
+    "type": "string",
+    "value": "azure-openai_text-embedding-ada-002"
+  },
+  "TARGET_PAGES": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ALL"
+  },
+  "TARGET_TRANSLATION_LANGUAGE": {
+    "sensitive": false,
+    "type": "string",
+    "value": "en"
+  },
+  "USE_AZURE_OPENAI_EMBEDDINGS": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  }
+}
