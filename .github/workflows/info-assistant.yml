@@ -142,7 +142,6 @@ jobs:
           fi
           echo ""
           echo "Finished creating env files."
-          cat ./inf_output.json
 
       - name: Standup Devcontainer
         shell: bash
