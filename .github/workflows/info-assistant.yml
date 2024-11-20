@@ -157,7 +157,7 @@ jobs:
       - name: Replace Tokens
         shell: bash
         run: |
-          sed -i "s|__SUFFIX__/${{ secrets.SUFFIX }}|g" ./inf_output.json
+          sed -i "s|__SUFFIX__|${{ secrets.SUFFIX }}|g" ./inf_output.json
           sed -i "s|__AOAI_SERVICE_NAME__|${{ secrets.AOAI_SERVICE_NAME }}|g" ./inf_output.json
           sed -i "s|__AOAI_RESOURCE_GROUP__|${{ secrets.AOAI_RESOURCE_GROUP }}|g" ./inf_output.json
           sed -i "s|__CONTAINER_REGISTRY_PASSWORD__|${{ secrets.CONTAINER_REGISTRY_PASSWORD }}|g" ./inf_output.json
