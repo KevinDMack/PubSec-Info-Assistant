@@ -82,11 +82,10 @@ jobs:
       - name: Build docker image
         shell: bash
         run: |
-          docker build '$(Build.SourcesDirectory)/.devcontainer' \
-              -t 'info-asst-devcontainer:$(Build.BuildId)' \
+          docker build './.devcontainer' \
               -t 'info-asst-devcontainer:latest' \
-              -f '$(Build.SourcesDirectory)/.devcontainer/Dockerfile' \
-              --cache-from $(CONTAINER_REGISTRY_ADDRESS)/info-asst-devcontainer:latest \
+              -f './.devcontainer/Dockerfile' \
+              --cache-from info-asst-devcontainer:latest \
               --build-arg BUILDKIT_INLINE_CACHE=1 \
               --build-arg USER_UID=$(id -u) \
               --build-arg USER_GID=$(id -g)
