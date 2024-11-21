@@ -54,72 +54,6 @@ jobs:
               sudo chmod 666 /var/run/docker.sock
           fi
 
-      - name: Install Devcontainer cli
-        shell: bash
-        run: |
-            echo "Detecting architecture..."
-            TARGET_ARCHITECTURE="amd64"
-            ARCH=$(uname -m)
-
-            if [[ "$ARCH" == "x86_64" ]]; then
-              echo "amd64 architecture detected"
-              echo "Installing npm.."
-              echo "Runnning 'npm install -g n'..."
-              sudo npm install -g n
-              echo "Runnning 'npm install -g @devcontainers/cli'..."
-              sudo npm install -g @devcontainers/cli
-              echo "Checking the version..."
-              devcontainer --version
-              printenv
-            elif [[ "$ARCH" == "aarch64" ]]; then
-                echo "arm64 architecture detected"
-                if ! command -v npm &> /dev/null
-                then
-                  echo "npm is not installed, installing..."
-                    sudo apt-get update
-                    echo "installing npm..."
-                    sudo apt-get install -y npm
-                    echo ""
-                    echo "Checking the version..."
-                    npm --version
-                    echo "install n package globally..."
-                    sudo npm install -g n
-                    echo ""
-                    echo "Running 'npm cache clean -f'..."
-                    sudo npm cache clean -f
-                    echo ""
-                    echo "Upgrade nodejs"
-                    sudo n 18.20.3
-                    echo "Run hash command"
-                    hash -r
-                    echo ""
-                    echo "Setup the directory...."
-                    sudo mkdir -p /usr/local/lib/node_modules
-                    sudo chown -R $USER:$USER /usr/local/lib/node_modules
-                    echo ""
-                    echo "Setting up permissions"
-                    mkdir ~/.npm-global
-                    npm config set prefix '~/.npm-global'
-                    echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
-                    source ~/.bashrc
-                fi
-
-                echo ""
-                echo "Get node version:"
-                node --version
-                echo ""
-                echo "Runnning 'npm install -g n'..."
-                sudo npm install -g n
-                echo "Runnning 'npm install -g @devcontainers/cli'..."
-                sudo npm install -g @devcontainers/cli
-                echo "Checking the version..."
-                devcontainer --version
-                printenv
-            else
-                echo "Unknown architecture: $ARCH"
-                exit 1
-            fi
-
       - name: Log in to Azure
         uses: azure/login@v1
         with:
@@ -145,17 +79,25 @@ jobs:
           echo ""
           echo "Finished creating env files."
 
-      - name: Standup Devcontainer
+      - name: Build docker image
         shell: bash
         run: |
-          devcontainer up --workspace-folder .
+          docker build '$(Build.SourcesDirectory)/.devcontainer' \
+              -t 'info-asst-devcontainer:$(Build.BuildId)' \
+              -t 'info-asst-devcontainer:latest' \
+              -f '$(Build.SourcesDirectory)/.devcontainer/Dockerfile' \
+              --cache-from $(CONTAINER_REGISTRY_ADDRESS)/info-asst-devcontainer:latest \
+              --build-arg BUILDKIT_INLINE_CACHE=1 \
+              --build-arg USER_UID=$(id -u) \
+              --build-arg USER_GID=$(id -g)
 
       - name: Login inside devcontainer
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . az cloud set --name AzureUSGovernment 
-          devcontainer exec --workspace-folder . az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_CLIENT_TENANT_ID }}
-          devcontainer exec --workspace-folder . az account show 
+          docker run -d --name devcontainer info-asst-devcontainer:latest
+          docker exec -it devcontainer /bin/bash -c "az cloud set --name AzureUSGovernment"
+          docker exec -it devcontainer /bin/bash -c "az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_CLIENT_TENANT_ID }}"
+          docker exec -it devcontainer /bin/bash -c "az account show"
 
       - name: Replace Tokens
         shell: bash
@@ -169,12 +111,12 @@ jobs:
       - name: Make-Run Take Ownership
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . make take-dir-ownership
+          docker exec -it devcontainer /bin/bash -c "make take-dir-ownership"
 
       - name: Make-Build
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . make build
+          docker exec -it devcontainer /bin/bash -c "make build"
 
       # # This is for the deployment of the infrastructure, should be used with caution given that changes for domain names and urls to the App Service that are not in the terraform.  
       # # - name: Make-infra
@@ -187,27 +129,27 @@ jobs:
         shell: bash
         run: |
           echo "Getting directory contents..."
-          devcontainer exec --workspace-folder . ls
+          docker exec -it devcontainer /bin/bash -c "ls"
           echo "" 
           echo "Running make extract-env..."
-          devcontainer exec --workspace-folder . make extract-env
+          docker exec -it devcontainer /bin/bash -c "make extract-env"
 
       - name: Make-Deploy Search indexes
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . make deploy-search-indexes
+          docker exec -it devcontainer /bin/bash -c "make deploy-search-indexes"
 
       - name: Make-Deploy Azure Functions
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . make deploy-functions
+          docker exec -it devcontainer /bin/bash -c "make deploy-functions"
 
       - name: Make-Deploy Web App'
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . make deploy-webapp
+          docker exec -it devcontainer /bin/bash -c "make deploy-webapp"
 
       - name: Make-Deploy Enrichments
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . make deploy-enrichments
+          docker exec -it devcontainer /bin/bash -c "make deploy-enrichments"
