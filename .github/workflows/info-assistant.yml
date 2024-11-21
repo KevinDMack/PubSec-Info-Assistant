@@ -4,13 +4,13 @@ name: info-assistant-deploy
 
 on: 
     workflow_dispatch:
-    push:
-        branches:
-         - main # Change to match your branch
+    # push:
+        # branches:
+         # - main # Change to match your branch
 
 jobs:
   deploy-info-assistant:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Need to change this
     permissions:
       contents: read
       packages: write
