@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy-info-assistant:
-    runs-on: ubuntu-latest # Need to change this
+    runs-on: ubuntu-20.04 # Need to change this
     permissions:
       contents: read
       packages: write
@@ -28,7 +28,7 @@ jobs:
           if docker --version >/dev/null 2>&1; then
               echo "Docker is installed, skipping the step."
           else
-              echo "Installing docker - version 24.0.9-1..."
+              echo "Installing docker - version 27.0.3-1..."
               echo ""
 
               sudo apt-get update
@@ -44,7 +44,7 @@ jobs:
                 sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
               sudo apt-get update
 
-              APT_DOCKER_INSTALL_VERSION=$(apt-cache madison docker-ce | awk '{ print $3 }' | grep 24.0.9-1)
+              APT_DOCKER_INSTALL_VERSION=$(apt-cache madison docker-ce | awk '{ print $3 }' | grep 27.0.3-1)
               sudo apt-get install docker-ce=$APT_DOCKER_INSTALL_VERSION docker-ce-cli=$APT_DOCKER_INSTALL_VERSION containerd.io docker-buildx-plugin docker-compose-plugin -y
 
               echo "Setup docker group"
