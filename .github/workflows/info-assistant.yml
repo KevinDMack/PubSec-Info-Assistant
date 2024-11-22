@@ -96,11 +96,11 @@ jobs:
           echo "Running Docker container..."
           docker run -d --name devcontainer info-asst-devcontainer:latest
           echo "Performing Cloud Set..."
-          docker exec -it devcontainer /bin/bash -c "az cloud set --name AzureUSGovernment"
+          docker exec devcontainer /bin/bash -c "az cloud set --name AzureUSGovernment"
           echo "Performming Login..."
-          docker exec -it devcontainer /bin/bash -c "az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_CLIENT_TENANT_ID }}"
+          docker exec devcontainer /bin/bash -c "az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_CLIENT_TENANT_ID }}"
           echo "Performing account show..."
-          docker exec -it devcontainer /bin/bash -c "az account show"
+          docker exec devcontainer /bin/bash -c "az account show"
 
       - name: Replace Tokens
         shell: bash
@@ -114,12 +114,12 @@ jobs:
       - name: Make-Run Take Ownership
         shell: bash
         run: |
-          docker exec -it devcontainer /bin/bash -c "make take-dir-ownership"
+          docker exec devcontainer /bin/bash -c "make take-dir-ownership"
 
       - name: Make-Build
         shell: bash
         run: |
-          docker exec -it devcontainer /bin/bash -c "make build"
+          docker exec devcontainer /bin/bash -c "make build"
 
       # # This is for the deployment of the infrastructure, should be used with caution given that changes for domain names and urls to the App Service that are not in the terraform.  
       # # - name: Make-infra
@@ -132,27 +132,27 @@ jobs:
         shell: bash
         run: |
           echo "Getting directory contents..."
-          docker exec -it devcontainer /bin/bash -c "ls"
+          docker exec devcontainer /bin/bash -c "ls"
           echo "" 
           echo "Running make extract-env..."
-          docker exec -it devcontainer /bin/bash -c "make extract-env"
+          docker exec devcontainer /bin/bash -c "make extract-env"
 
       - name: Make-Deploy Search indexes
         shell: bash
         run: |
-          docker exec -it devcontainer /bin/bash -c "make deploy-search-indexes"
+          docker exec devcontainer /bin/bash -c "make deploy-search-indexes"
 
       - name: Make-Deploy Azure Functions
         shell: bash
         run: |
-          docker exec -it devcontainer /bin/bash -c "make deploy-functions"
+          docker exec devcontainer /bin/bash -c "make deploy-functions"
 
       - name: Make-Deploy Web App'
         shell: bash
         run: |
-          docker exec -it devcontainer /bin/bash -c "make deploy-webapp"
+          docker exec devcontainer /bin/bash -c "make deploy-webapp"
 
       - name: Make-Deploy Enrichments
         shell: bash
         run: |
-          docker exec -it devcontainer /bin/bash -c "make deploy-enrichments"
+          docker exec devcontainer /bin/bash -c "make deploy-enrichments"
