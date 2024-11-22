@@ -51,7 +51,7 @@ check-subscription:
 
 # CI rules (used by automated builds)
 take-dir-ownership:
-	@sudo chown -R vscode .
+	@chown -R vscode .
 
 terraform-remote-backend:
 	@./scripts/terraform-remote-backend.sh

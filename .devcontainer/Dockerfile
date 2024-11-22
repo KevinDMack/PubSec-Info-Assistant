@@ -18,11 +18,11 @@ RUN bash "/tmp/non-root-user.sh" "${USERNAME}" "${USER_UID}" "${USER_GID}"
 ENV DEVCONTAINER=true
 
 # Configure apt, install packages and general tools
-RUN sudo apt-get update \
-    && sudo apt-get -y install --no-install-recommends apt-utils dialog nano bash-completion sudo bsdmainutils cmake \
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends apt-utils dialog nano bash-completion bsdmainutils cmake \
     #
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
-    && sudo apt-get -y install git iproute2 procps lsb-release figlet build-essential dnsutils openvpn
+    && apt-get -y install git iproute2 procps lsb-release figlet build-essential dnsutils openvpn
 
 # Save command line history
 RUN echo "export HISTFILE=/home/$USERNAME/commandhistory/.bash_history" >> "/home/$USERNAME/.bashrc" \
@@ -32,13 +32,13 @@ RUN echo "export HISTFILE=/home/$USERNAME/commandhistory/.bash_history" >> "/hom
     && chown -R $USERNAME /home/$USERNAME/commandhistory
 
 # docker-client
-RUN sudo apt-get update \
+RUN apt-get update \
     # libgl dependencies and install Docker CE CLI
-    && sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release -y \
-    && curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg \
-    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
-    && sudo apt-get update -y \
-    && sudo apt-get install -y docker-ce-cli
+    && apt-get install apt-transport-https ca-certificates curl gnupg lsb-release -y \
+    && curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt-get update -y \
+    && apt-get install -y docker-ce-cli
 
 ARG DOCKER_GROUP_ID
 COPY ./scripts/docker-client.sh /tmp/
@@ -83,11 +83,11 @@ RUN /tmp/nodejs.sh
 # Note: if running on WSL (Windows) you can add the below to your $profile so your tz is automatically synced
 # $tz =  [Windows.Globalization.Calendar,Windows.Globalization,ContentType=WindowsRuntime]::New().GetTimeZone()
 # [Environment]::SetEnvironmentVariable("TZ",$tz, "User")
-RUN if [ -z "$TZ" ]; then TZ="Europe/London"; fi && sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ | sudo tee /etc/timezone > /dev/null
+RUN if [ -z "$TZ" ]; then TZ="Europe/London"; fi && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ | tee /etc/timezone > /dev/null
 
 # Install gettext-base so that we have envsubst
-RUN sudo apt-get update \
-    && sudo apt-get -y install gettext-base
+RUN apt-get update \
+    && apt-get -y install gettext-base
 
 # Install python packages for migration
 RUN pip install azure-cosmos
@@ -99,8 +99,10 @@ RUN pip install azure-keyvault-secrets
 RUN pip install pytest
 
 # Install skopeo - This must be at the end due to pulling from trixie
-RUN sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install usrmerge
+RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install usrmerge
 
-RUN echo 'deb http://ftp.debian.org/debian trixie main' | sudo tee /etc/apt/sources.list.d/debian.trixie.list \
-    && sudo apt-get update \
-    && sudo apt-get install skopeo
+RUN echo 'deb http://ftp.debian.org/debian trixie main' | tee /etc/apt/sources.list.d/debian.trixie.list \
+    && apt-get update \
+    && apt-get install skopeo
+
+    CMD ["tail", "-f", "/dev/null"]
