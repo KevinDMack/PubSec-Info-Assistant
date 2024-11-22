@@ -100,7 +100,7 @@ jobs:
         shell: bash
         run: |
             docker exec devcontainer /bin/bash -c "apt install tree"
-            docker exec devcontainer /bin/bash -c "tree ."
+            docker exec devcontainer /bin/bash -c "tree -d  ."
       
       - name: Login inside devcontainer
         shell: bash
