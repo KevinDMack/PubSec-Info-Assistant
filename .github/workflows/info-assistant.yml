@@ -79,17 +79,11 @@ jobs:
           echo ""
           echo "Finished creating env files."
 
-      - name: Build docker image
+      - name: Pull Docker Image
         shell: bash
         run: |
-          # docker build './.devcontainer' \
-          #     -t 'info-asst-devcontainer:latest' \
-          #     -f './.devcontainer/Dockerfile' \
-          #     --cache-from info-asst-devcontainer:latest \
-          #     --build-arg BUILDKIT_INLINE_CACHE=1 \
-          #     --build-arg USER_UID=$(id -u) \
-          #     --build-arg USER_GID=$(id -g)
-          docker login -u ${{ secrets.PUBLIC_CONTAINER_REGISTRY_USERNAME }} -p ${{ secrets.PUBLIC_CONTAINER_REGISTRY_PASSWORD }}
+          export CR_PAT=${{ secrets.PUBLIC_CONTAINER_REGISTRY_PASSWORD }}
+          echo $CR_PAT | docker login ghcr.io -u ${{ secrets.PUBLIC_CONTAINER_REGISTRY_USERNAME }} --password-stdin
           docker pull ghcr.io/mack-bytes-government/info-asst-devcontainer:latest
 
       - name: Start container
