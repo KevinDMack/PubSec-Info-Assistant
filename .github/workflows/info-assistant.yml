@@ -90,6 +90,12 @@ jobs:
               --build-arg USER_UID=$(id -u) \
               --build-arg USER_GID=$(id -g)
 
+      - name: See inside of container
+        shell: bash
+        run: |
+            docker exec devcontainer /bin/bash -c "apt install tree"
+            docker exec devcontainer /bin/bash -c "tree ."
+      
       - name: Login inside devcontainer
         shell: bash
         run: |
