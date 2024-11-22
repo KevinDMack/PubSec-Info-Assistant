@@ -101,12 +101,6 @@ jobs:
               --workdir /workspaces/info-asst \
               --user vscode \
               'info-asst-devcontainer:latest'
-
-      - name: See inside of container
-        shell: bash
-        run: |
-            docker exec devcontainer /bin/bash -c "apt install tree"
-            docker exec devcontainer /bin/bash -c "tree -d  ."
       
       - name: Login inside devcontainer
         shell: bash
