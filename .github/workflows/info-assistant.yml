@@ -90,6 +90,12 @@ jobs:
               --build-arg USER_UID=$(id -u) \
               --build-arg USER_GID=$(id -g)
 
+      - name: Start container
+        shell: bash
+        run: |
+            echo "Running Docker container..."
+            docker run -d --name devcontainer info-asst-devcontainer:latest
+
       - name: See inside of container
         shell: bash
         run: |
@@ -99,8 +105,6 @@ jobs:
       - name: Login inside devcontainer
         shell: bash
         run: |
-          echo "Running Docker container..."
-          docker run -d --name devcontainer info-asst-devcontainer:latest
           echo "Performing Cloud Set..."
           docker exec devcontainer /bin/bash -c "az cloud set --name AzureUSGovernment"
           echo "Performming Login..."
