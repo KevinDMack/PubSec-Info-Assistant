@@ -105,4 +105,11 @@ RUN echo 'deb http://ftp.debian.org/debian trixie main' | tee /etc/apt/sources.l
     && apt-get update \
     && apt-get install skopeo
 
-    CMD ["tail", "-f", "/dev/null"]
+# Create the directory and set permissions
+RUN mkdir -p /workspaces/info-asst && \
+    chown -R vscode:vscode /workspaces/info-asst
+
+# Switch to the vscode user
+USER vscode
+
+CMD ["tail", "-f", "/dev/null"]
