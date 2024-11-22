@@ -85,6 +85,7 @@ jobs:
           export CR_PAT=${{ secrets.PUBLIC_CONTAINER_REGISTRY_PASSWORD }}
           echo $CR_PAT | docker login ghcr.io -u ${{ secrets.PUBLIC_CONTAINER_REGISTRY_USERNAME }} --password-stdin
           docker pull ghcr.io/mack-bytes-government/info-asst-devcontainer:latest
+          docker tag ghcr.io/mack-bytes-government/info-asst-devcontainer:latest info-asst-devcontainer:latest
 
       - name: Start container
         shell: bash
