@@ -55,7 +55,7 @@ jobs:
       #    fi
 
       - name: Log in to Azure
-        uses: actions/login@v1
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           environment: 'AzureUSGovernment'
@@ -82,13 +82,15 @@ jobs:
       - name: Build docker image
         shell: bash
         run: |
-          docker build './.devcontainer' \
-              -t 'info-asst-devcontainer:latest' \
-              -f './.devcontainer/Dockerfile' \
-              --cache-from info-asst-devcontainer:latest \
-              --build-arg BUILDKIT_INLINE_CACHE=1 \
-              --build-arg USER_UID=$(id -u) \
-              --build-arg USER_GID=$(id -g)
+          # docker build './.devcontainer' \
+          #     -t 'info-asst-devcontainer:latest' \
+          #     -f './.devcontainer/Dockerfile' \
+          #     --cache-from info-asst-devcontainer:latest \
+          #     --build-arg BUILDKIT_INLINE_CACHE=1 \
+          #     --build-arg USER_UID=$(id -u) \
+          #     --build-arg USER_GID=$(id -g)
+          docker login -u ${{ secrets.PUBLIC_CONTAINER_REGISTRY_USERNAME }} -p ${{ secrets.PUBLIC_CONTAINER_REGISTRY_PASSWORD }}
+          docker pull ghcr.io/mack-bytes-government/info-asst-devcontainer:latest
 
       - name: Start container
         shell: bash
