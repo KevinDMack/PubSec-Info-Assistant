@@ -95,7 +95,7 @@ jobs:
         run: |
             echo "Running Docker container..."
             # docker run -d --name devcontainer info-asst-devcontainer:latest
-            docker run --rm --name devcontainer \
+            docker run -d --rm --name devcontainer \
               --mount "type=bind,src=.,dst=/workspaces/info-asst" \
               -v /var/run/docker.sock:/var/run/docker.sock \
               --workdir /workspaces/info-asst \
