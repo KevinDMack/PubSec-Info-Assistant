@@ -132,7 +132,7 @@ jobs:
         run: |
           echo "Writing local env file..."
           if [ ! -f ./scripts/environments/local.env ]; then
-            echo "${{ secrets.LOCAL_ENV }}" > ./scripts/environments/local.env
+            echo "${{ secrets.DEPLOY_LOCAL_ENV }}" > ./scripts/environments/local.env
           fi
           echo ""
           echo "Writing tf-backend env file..."
