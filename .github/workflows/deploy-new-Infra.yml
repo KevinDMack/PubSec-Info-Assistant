@@ -1,6 +1,6 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
-name: info-assistant-deploy
+name: deploy-new-infra
 
 on: 
     workflow_dispatch:
