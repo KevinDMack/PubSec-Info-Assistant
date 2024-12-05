@@ -180,7 +180,7 @@ jobs:
       - name: Make-infra
         shell: bash
         run: |
-          devcontainer exec --workspace-folder . make infrastructure-remote-backend
+          devcontainer exec --workspace-folder . make infrastructure
 
       - name: Make-Extract environment
         shell: bash
