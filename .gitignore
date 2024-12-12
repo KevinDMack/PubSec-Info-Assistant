@@ -369,7 +369,7 @@ main.parameters.json
 infrastructure.env
 infrastructure.debug.env
 infra_output.json
-#inf_output.json
+inf_output.json
 random.txt
 .state
 
@@ -406,3 +406,4 @@ azcopy_dir
 openvpn/*
 !openvpn/info.txt
 scripts/environments/tf-backend.env
+inf_output.json
